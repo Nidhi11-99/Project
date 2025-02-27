@@ -1,0 +1,74 @@
+/****************CREATING DATABaSE ************************/
+CREATE DATABASE ecommerce_db;
+
+/****************CREATING CUSTOMER TABLE ************************/
+
+CREATE TABLE customers (
+  Id int NOT NULL AUTO_INCREMENT,
+  Name varchar(255) NOT NULL,
+  Email varchar(255) NOT NULL,
+  Contact varchar(20) NOT NULL,
+  Address text NOT NULL,
+  City varchar(100) NOT NULL,
+  State varchar(100) NOT NULL,
+  Sex char(1) NOT NULL,
+  Password varchar(255) NOT NULL,
+  phone varchar(255) DEFAULT NULL,
+  PRIMARY KEY (Id)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+/****************CREATING SELLER TABLE ************************/
+CREATE TABLE seller (
+  SId int NOT NULL AUTO_INCREMENT,
+  Name varchar(255) NOT NULL,
+  Email varchar(255) NOT NULL,
+  Contact varchar(20) NOT NULL,
+  Address text NOT NULL,
+  City varchar(100) NOT NULL,
+  State varchar(100) NOT NULL,
+  Sex enum('MALE','FEMALE','NOT_SPECIFIED') NOT NULL,
+  Adhar_No varchar(20) NOT NULL,
+  UDID_No varchar(20) NOT NULL,
+  IFSC_Code varchar(11) NOT NULL,
+  Account_No varchar(20) NOT NULL,
+  Adhar_PDF longblob NOT NULL,
+  UDID_PDF longblob NOT NULL,
+  Passbook_PDF longblob NOT NULL,
+  password varchar(255) NOT NULL,
+  PRIMARY KEY (SId)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+/****************CREATING PRODUCT TABLE ************************/
+
+  CREATE TABLE products (
+  Pid bigint NOT NULL AUTO_INCREMENT,
+  name varchar(255) NOT NULL,
+  price decimal(10,2) NOT NULL,
+  category varchar(255) DEFAULT NULL,
+  SId int NOT NULL,
+  image_url varchar(255) DEFAULT NULL,
+  PRIMARY KEY (Pid),
+  KEY fk_seller (SId),
+  CONSTRAINT fk_seller FOREIGN KEY (SId) REFERENCES seller (SId) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+/****************USE DATABASE ************************/
+
+use ecommerce_db;
+
+/****************QUERY FOR PRODUCT TABLE ************************/
+
+Select * from products;
+
+/****************QUERY FOR SELLER TABLE ************************/
+
+Select * from seller;
+
+
+/****************QUERY FOR CUSTOMER TABLE ************************/
+
+Select * from customer;
+
